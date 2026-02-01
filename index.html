@@ -26,28 +26,22 @@
       color: #e6005c;
     }
 
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      margin: 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
 
-    #yes {
-      background-color: #ff4d79;
-      color: white;
-    }
+#yes, #no {
+  transition: transform 0.3s ease;
+}
 
-    #no {
+#no {
   background-color: #999;
   color: white;
-  position: absolute;
-  left: 120px;
-  top: 80px;
-  transition: left 0.2s ease, top 0.2s ease;
 }
+
 
     #gif {
       display: none;
@@ -65,8 +59,11 @@
   <div class="box">
     <h1>Will you be my Valentine? ❤️</h1>
 
-    <button id="yes">Yes</button>
-    <button id="no">No</button>
+    <div class="buttons">
+  <button id="yes">Yes</button>
+  <button id="no">No</button>
+</div>
+
 
     <div id="gif">
       <h2>You had no choice 😈</h2>
@@ -104,8 +101,25 @@ do {
   noButton.style.top = y + "px";
 };
 
-noButton.addEventListener("mouseover", moveNoButton);
-noButton.addEventListener("touchstart", moveNoButton);
+let scale = 1;
+
+noButton.addEventListener("mouseover", () => {
+  scale -= 0.1;
+  if (scale < 0.4) scale = 0.4;
+
+  noButton.style.transform = `scale(${scale})`;
+  yesButton.style.transform = `scale(${1 + (1 - scale)})`;
+});
+
+// Mobile support
+noButton.addEventListener("touchstart", () => {
+  scale -= 0.1;
+  if (scale < 0.4) scale = 0.4;
+
+  noButton.style.transform = `scale(${scale})`;
+  yesButton.style.transform = `scale(${1 + (1 - scale)})`;
+});
+
 
 
     yesButton.addEventListener("click", () => {
