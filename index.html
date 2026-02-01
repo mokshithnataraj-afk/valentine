@@ -18,30 +18,42 @@
     .box {
       text-align: center;
       position: relative;
-      width: 300px;
-      height: 200px;
+      width: 320px;
+      height: 240px;
     }
 
     h1 {
       color: #e6005c;
     }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-}
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      position: relative;
+    }
 
-#yes, #no {
-  transition: transform 0.3s ease;
-}
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
 
-#no {
-  background-color: #999;
-  color: white;
-}
+    #yes {
+      background-color: #ff4d79;
+      color: white;
+    }
 
+    #no {
+      background-color: #999;
+      color: white;
+      position: absolute;
+      right: 0;
+    }
 
     #gif {
       display: none;
@@ -60,10 +72,9 @@
     <h1>Will you be my Valentine? ❤️</h1>
 
     <div class="buttons">
-  <button id="yes">Yes</button>
-  <button id="no">No</button>
-</div>
-
+      <button id="yes">Yes</button>
+      <button id="no">No</button>
+    </div>
 
     <div id="gif">
       <h2>You had no choice 😈</h2>
@@ -71,91 +82,12 @@
     </div>
   </div>
 
+  <!-- 🎵 Music -->
+  <audio id="music" src="https://www.bensound.com/bensound-music/bensound-love.mp3"></audio>
+
   <script>
     const noButton = document.getElementById("no");
     const yesButton = document.getElementById("yes");
     const gifDiv = document.getElementById("gif");
-    const title = document.querySelector("h1");
+    cons
 
-    const moveNoButton = () => {
-  const box = document.querySelector(".box");
-
-  const maxX = box.clientWidth - noButton.offsetWidth;
-  const maxY = box.clientHeight - noButton.offsetHeight;
-
- const yesRect = yesButton.getBoundingClientRect();
-let x, y;
-
-do {
-  x = Math.random() * maxX;
-  y = Math.random() * maxY;
-} while (
-  x + noButton.offsetWidth > yesRect.left &&
-  x < yesRect.right &&
-  y + noButton.offsetHeight > yesRect.top &&
-  y < yesRect.bottom
-);
-
-
-  noButton.style.left = x + "px";
-  noButton.style.top = y + "px";
-};
-
-let scale = 1;
-
-noButton.addEventListener("mouseover", () => {
-  scale -= 0.1;
-  if (scale < 0.4) scale = 0.4;
-
-  noButton.style.transform = `scale(${scale})`;
-  yesButton.style.transform = `scale(${1 + (1 - scale)})`;
-});
-
-// Mobile support
-noButton.addEventListener("touchstart", () => {
-  scale -= 0.1;
-  if (scale < 0.4) scale = 0.4;
-
-  noButton.style.transform = `scale(${scale})`;
-  yesButton.style.transform = `scale(${1 + (1 - scale)})`;
-});
-
-
-
-    yesButton.addEventListener("click", () => {
-      title.innerText = "YAYYYY 💕";
-      gifDiv.style.display = "block";
-      launchConfetti();
-    });
-
-    function launchConfetti() {
-      for (let i = 0; i < 100; i++) {
-        const confetti = document.createElement("div");
-        confetti.style.position = "fixed";
-        confetti.style.width = "8px";
-        confetti.style.height = "8px";
-        confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,70%)`;
-        confetti.style.left = Math.random() * window.innerWidth + "px";
-        confetti.style.top = "-10px";
-        confetti.style.borderRadius = "50%";
-        confetti.style.zIndex = "9999";
-        document.body.appendChild(confetti);
-
-        const fall = confetti.animate(
-          [
-            { transform: "translateY(0)" },
-            { transform: `translateY(${window.innerHeight + 20}px)` }
-          ],
-         { 
-  duration: 3000 + Math.random() * 2000,
-  easing: "ease-out"
-}
-
-        );
-
-        fall.onfinish = () => confetti.remove();
-      }
-    }
-  </script>
-</body>
-</html>
