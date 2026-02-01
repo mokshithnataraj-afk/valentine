@@ -83,8 +83,8 @@
     </div>
   </div>
 
-  <!-- 🎵 MISCHIEVOUS MUSIC -->
-  <audio id="music" src="https://www.bensound.com/bensound-music/bensound-funkyelement.mp3"></audio>
+  <!-- 🎵 Music -->
+  <audio id="music" src="https://www.bensound.com/bensound-music/bensound-love.mp3"></audio>
 
   <script>
     const noButton = document.getElementById("no");
@@ -99,9 +99,13 @@
       scale -= 0.1;
       if (scale < 0.3) scale = 0.3;
 
+      // shrink NO
       noButton.style.transform = `scale(${scale})`;
+
+      // grow YES
       yesButton.style.transform = `scale(${1 + (1 - scale)})`;
 
+      // move NO randomly
       const x = Math.random() * 200 - 100;
       const y = Math.random() * 80 - 40;
       noButton.style.transform += ` translate(${x}px, ${y}px)`;
@@ -147,5 +151,6 @@
   </script>
 </body>
 </html>
+
 
 
