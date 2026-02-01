@@ -80,18 +80,33 @@
     const gifDiv = document.getElementById("gif");
     const title = document.querySelector("h1");
 
-    noButton.addEventListener("mouseover", () => {
+    const moveNoButton = () => {
   const box = document.querySelector(".box");
 
   const maxX = box.clientWidth - noButton.offsetWidth;
   const maxY = box.clientHeight - noButton.offsetHeight;
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+ const yesRect = yesButton.getBoundingClientRect();
+let x, y;
+
+do {
+  x = Math.random() * maxX;
+  y = Math.random() * maxY;
+} while (
+  x + noButton.offsetWidth > yesRect.left &&
+  x < yesRect.right &&
+  y + noButton.offsetHeight > yesRect.top &&
+  y < yesRect.bottom
+);
+
 
   noButton.style.left = x + "px";
   noButton.style.top = y + "px";
-});
+};
+
+noButton.addEventListener("mouseover", moveNoButton);
+noButton.addEventListener("touchstart", moveNoButton);
+
 
     yesButton.addEventListener("click", () => {
       title.innerText = "YAYYYY 💕";
@@ -117,7 +132,11 @@
             { transform: "translateY(0)" },
             { transform: `translateY(${window.innerHeight + 20}px)` }
           ],
-          { duration: 3000 }
+         { 
+  duration: 3000 + Math.random() * 2000,
+  easing: "ease-out"
+}
+
         );
 
         fall.onfinish = () => confetti.remove();
