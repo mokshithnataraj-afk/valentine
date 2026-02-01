@@ -76,9 +76,10 @@
       <button id="no">No</button>
     </div>
 
+    <!-- 💕 RELATABLE ENDING -->
     <div id="gif">
-      <h2>You had no choice 😈</h2>
-      <img src="https://media.giphy.com/media/I0MYt5jPR6QX5pnqM/giphy.gif">
+      <h2>Okay this is kinda cute 🥺💖</h2>
+      <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWVlZDJ1dHc4dDZmbmY3b2xqYTFsZ3Z2Z3Y2ZGFhM2R6Y2t4YyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/MDJ9IbxxvDUQM/giphy.gif">
     </div>
   </div>
 
@@ -98,13 +99,10 @@
       scale -= 0.1;
       if (scale < 0.3) scale = 0.3;
 
-      // Shrink NO
       noButton.style.transform = `scale(${scale})`;
 
-      // Grow YES
       yesButton.style.transform = `scale(${1 + (1 - scale)})`;
 
-      // Move NO randomly
       const x = Math.random() * 200 - 100;
       const y = Math.random() * 80 - 40;
       noButton.style.transform += ` translate(${x}px, ${y}px)`;
@@ -150,3 +148,4 @@
   </script>
 </body>
 </html>
+
