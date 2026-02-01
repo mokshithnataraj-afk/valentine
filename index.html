@@ -76,11 +76,18 @@
     const title = document.querySelector("h1");
 
     noButton.addEventListener("mouseover", () => {
-      const x = Math.random() * (window.innerWidth - 100);
-      const y = Math.random() * (window.innerHeight - 50);
-      noButton.style.left = x + "px";
-      noButton.style.top = y + "px";
-    });
+  const buttonWidth = noButton.offsetWidth;
+  const buttonHeight = noButton.offsetHeight;
+
+  const maxX = window.innerWidth - buttonWidth - 20;
+  const maxY = window.innerHeight - buttonHeight - 20;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noButton.style.left = x + "px";
+  noButton.style.top = y + "px";
+});
 
     yesButton.addEventListener("click", () => {
       title.innerText = "YAYYYY 💕";
