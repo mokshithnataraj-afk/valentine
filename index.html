@@ -1,0 +1,50 @@
+<script>
+  const noButton = document.getElementById("no");
+  const yesButton = document.getElementById("yes");
+  const gifDiv = document.getElementById("gif");
+  const title = document.querySelector("h1");
+
+  // No button runs away 😈
+  noButton.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+    noButton.style.left = x + "px";
+    noButton.style.top = y + "px";
+  });
+
+  // Yes button magic 💖
+  yesButton.addEventListener("click", () => {
+    title.innerText = "YAYYYY 💕💍";
+    gifDiv.style.display = "block";
+    launchConfetti();
+  });
+
+  // Confetti 🎉
+  function launchConfetti() {
+    for (let i = 0; i < 100; i++) {
+      const confetti = document.createElement("div");
+      confetti.style.position = "fixed";
+      confetti.style.width = "8px";
+      confetti.style.height = "8px";
+      confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,70%)`;
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.top = "-10px";
+      confetti.style.borderRadius = "50%";
+      confetti.style.zIndex = "9999";
+      document.body.appendChild(confetti);
+
+      const fall = confetti.animate(
+        [
+          { transform: "translateY(0)" },
+          { transform: `translateY(${window.innerHeight + 20}px)` }
+        ],
+        {
+          duration: 2000 + Math.random() * 2000,
+          easing: "ease-out"
+        }
+      );
+
+      fall.onfinish = () => confetti.remove();
+    }
+  }
+</script>
