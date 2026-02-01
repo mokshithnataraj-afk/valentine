@@ -89,5 +89,64 @@
     const noButton = document.getElementById("no");
     const yesButton = document.getElementById("yes");
     const gifDiv = document.getElementById("gif");
-    cons
+    const title = document.querySelector("h1");
+    const music = document.getElementById("music");
 
+    let scale = 1;
+
+    function dodgeNoButton() {
+      scale -= 0.1;
+      if (scale < 0.3) scale = 0.3;
+
+      // Shrink NO
+      noButton.style.transform = `scale(${scale})`;
+
+      // Grow YES
+      yesButton.style.transform = `scale(${1 + (1 - scale)})`;
+
+      // Move NO randomly
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 80 - 40;
+      noButton.style.transform += ` translate(${x}px, ${y}px)`;
+    }
+
+    noButton.addEventListener("mouseover", dodgeNoButton);
+    noButton.addEventListener("touchstart", dodgeNoButton);
+
+    yesButton.addEventListener("click", () => {
+      title.innerText = "YAYYYY 💕";
+      gifDiv.style.display = "block";
+      launchConfetti();
+      music.play();
+    });
+
+    function launchConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.style.position = "fixed";
+        confetti.style.width = "8px";
+        confetti.style.height = "8px";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360},100%,70%)`;
+        confetti.style.left = Math.random() * window.innerWidth + "px";
+        confetti.style.top = "-10px";
+        confetti.style.borderRadius = "50%";
+        confetti.style.zIndex = "9999";
+        document.body.appendChild(confetti);
+
+        const fall = confetti.animate(
+          [
+            { transform: "translateY(0)" },
+            { transform: `translateY(${window.innerHeight + 20}px)` }
+          ],
+          {
+            duration: 3000 + Math.random() * 2000,
+            easing: "ease-out"
+          }
+        );
+
+        fall.onfinish = () => confetti.remove();
+      }
+    }
+  </script>
+</body>
+</html>
